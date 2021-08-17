@@ -10,3 +10,5 @@
 <p>test2</p>
 <button on:click={tr}>test request</button>
 <button>test 2</button>
+
+<p>qwkdhqiwhdiqwuhdiuqwhdiuqwhd</p>
