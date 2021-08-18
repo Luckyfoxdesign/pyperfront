@@ -1,6 +1,7 @@
 <script>
+	let ki
 	async function tr() {
-		await fetch("https://bs.devcodebox.com/").then((r) => console.log(r))
+		await fetch("https://bs.devcodebox.com/").then((r) => (ki = r))
 	}
 </script>
 
@@ -11,4 +12,7 @@
 <button on:click={tr}>test request</button>
 <button>test 2</button>
 
-<p>qwkdhqiwhdiqwuhdiuqwhdiuqwhd</p>
+{#if ki != undefined}
+	<p>{ki.name}</p>
+	<p>{ki.msg}</p>
+{/if}
