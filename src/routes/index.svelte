@@ -13,6 +13,7 @@
 <button>test 2</button>
 
 {#if ki != undefined}
+	<p>{ki}</p>
 	<p>{ki.name}</p>
 	<p>{ki.msg}</p>
 {/if}
