@@ -6,6 +6,8 @@
 </script>
 
 <script>
+	// const ADDRESS = "https://bs.devcodebox.com/"
+	const ADDRESS = "http://localhost:9000/"
 	let password = "",
 		email = ""
 	export let sid, data
@@ -17,7 +19,7 @@
 	// !TODO Добавить валидацию полей
 
 	const register = async () => {
-		const response = await fetch("https://bs.devcodebox.com/api/auth/registration", {
+		const response = await fetch(`${ADDRESS}api/auth/registration`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

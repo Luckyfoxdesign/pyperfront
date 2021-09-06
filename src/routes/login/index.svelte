@@ -7,6 +7,8 @@
 </script>
 
 <script>
+	// const ADDRESS = "https://bs.devcodebox.com/"
+	const ADDRESS = "http://localhost:9000/"
 	let password = "",
 		email = ""
 	$: msg = undefined
@@ -14,7 +16,7 @@
 	import { session } from "$app/stores"
 
 	async function handleLogin() {
-		await fetch("https://bs.devcodebox.com/api/auth/login", {
+		await fetch(`${ADDRESS}api/auth/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -31,7 +33,7 @@
 			})
 			.then((responseResultJSON) => {
 				$session.data = responseResultJSON.data
-				console.log("login" + responseJSON.data)
+				console.log("login" + responseResultJSON.data)
 
 				switch (responseResultJSON.data.role) {
 					case "admin":
