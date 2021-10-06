@@ -1,25 +1,27 @@
 <script>
-	import Header from "$lib/header/Header.svelte"
-	import "../app.css"
+  import Header from "$lib/header/Header.svelte";
+  import "../app.css";
 </script>
 
 <svelte:head>
-	<title>About</title>
+  <title>About</title>
 </svelte:head>
 
 <Header />
 
 <main>
-	<slot />
+  <slot />
 </main>
 
 <footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+  <p>
+    visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
+  </p>
 </footer>
 
 <style>
-	main {
-		display: flex;
-		flex-direction: column;
-	}
+  main {
+    display: flex;
+    flex-direction: column;
+  }
 </style>

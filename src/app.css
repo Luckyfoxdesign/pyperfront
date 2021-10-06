@@ -1,22 +1,22 @@
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji,
-		Segoe UI Emoji, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #333;
-	position: relative;
-	height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  position: relative;
+  height: 100vh;
 }
 .wrapper {
-	display: flex;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 .wrapper__content {
-	width: inherit;
-	max-width: 720px;
+  width: inherit;
+  max-width: 720px;
 }
 h1,
 h2,
@@ -24,48 +24,48 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
-	font-weight: 400;
-	line-height: 1.2;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 h1 {
-	font-size: 2em;
+  font-size: 2em;
 }
 
 a {
-	color: inherit;
+  color: inherit;
 }
 
 p {
-	font-family: Charter, Bitstream Charter, serif;
-	margin-bottom: 16px;
-	margin-top: 8px;
-	font-size: 1.143em;
+  font-family: Charter, Bitstream Charter, serif;
+  margin-bottom: 16px;
+  margin-top: 8px;
+  font-size: 1.143em;
 }
 
 code {
-	font-family: menlo, inconsolata, monospace;
-	font-size: calc(1em - 2px);
-	color: #555;
-	background-color: #f0f0f0;
-	padding: 0.2em 0.4em;
-	border-radius: 2px;
+  font-family: menlo, inconsolata, monospace;
+  font-size: calc(1em - 2px);
+  color: #555;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 2px;
 }
 
 :root {
-	--WhiteFF: #ffffff;
-	/* Серая палитра */
-	--Gray33: #333333;
-	--Gray75: #757575;
-	--GrayCC: #cccccc;
-	--GrayF5: #f5f5f5;
+  --WhiteFF: #ffffff;
+  /* Серая палитра */
+  --Gray33: #333333;
+  --Gray75: #757575;
+  --GrayCC: #cccccc;
+  --GrayF5: #f5f5f5;
 
-	--Green500: #36c924;
-	--Green600: #1eac1a;
+  --Green500: #36c924;
+  --Green600: #1eac1a;
 
-	--Red500: #ff4245;
-	--Red600: #db2430;
+  --Red500: #ff4245;
+  --Red600: #db2430;
 
-	--Blue500: #3366ff;
+  --Blue500: #3366ff;
 }

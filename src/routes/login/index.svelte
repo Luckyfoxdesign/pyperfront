@@ -1,12 +1,22 @@
 <script context="module">
-	import { goto } from "$app/navigation"
-	export function preload(page, { sid, data }) {
-		if (data != undefined) this.redirect(302, "/")
-		else return { sid, data }
+	export async function load({ fetch }) {
+		const fetchResult = await fetch("http://localhost:9000/api/auth/check-availability", {
+			method: "GET",
+			credentials: "include",
+		})
+		if (fetchResult.ok) {
+			return {
+				status: 302,
+				redirect: "/",
+			}
+		} else {
+			return {}
+		}
 	}
 </script>
 
 <script>
+	import { sessionData } from "./../../lib/store.js"
 	// const ADDRESS = "https://bs.devcodebox.com/"
 	const ADDRESS = "http://localhost:9000/"
 	let password = "",
@@ -14,14 +24,17 @@
 	$: msg = undefined
 
 	import { session } from "$app/stores"
+	import { goto } from "$app/navigation"
 
 	async function handleLogin() {
+		console.log($sessionData.data)
 		await fetch(`${ADDRESS}api/auth/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
 			},
+			credentials: "include",
 			body: JSON.stringify({ email, password }),
 		})
 			.then((responseResult) => {
@@ -32,17 +45,9 @@
 				}
 			})
 			.then((responseResultJSON) => {
+				$sessionData.data = responseResultJSON.data
 				$session.data = responseResultJSON.data
-				console.log("login" + responseResultJSON.data)
-
-				switch (responseResultJSON.data.role) {
-					case "admin":
-						goto("dashboard/")
-						break
-					case "user":
-						goto(".")
-						break
-				}
+				goto("/dashboard")
 			})
 			.catch((getMyArticlesError) => {
 				console.log(getMyArticlesError)

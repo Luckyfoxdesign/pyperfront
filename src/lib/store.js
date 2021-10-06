@@ -1,11 +1,14 @@
-import { writable } from "svelte/store"
+import { writable } from "svelte/store";
 
-export const articleBlocksArray = writable([{}])
+export const articleBlocksArray = writable([{}]);
 export const articleTitleAndSubtitileObj = writable({
-	title: "",
-	subtitle: "",
-	content: [],
-	type: "",
-	titleId: "",
-})
-export const paragraphDataIdCounter = writable(1)
+  title: "",
+  subtitle: "",
+  content: [],
+  type: "",
+  titleId: "",
+});
+export const paragraphDataIdCounter = writable(1);
+export const sessionData = writable({
+  data: "",
+});

@@ -1,39 +1,140 @@
 <script>
-	import { each } from "svelte/internal"
+	import { onMount } from "svelte"
+	// import Blogpost from "./_components/Blogpost.svelte"
+	import NewsSkeleton from "./_components/NewsSkeleton.svelte"
 
-	import Blogpost from "./_components/Blogpost.svelte"
+	let blogPostsArray
+	const ADDRESS = "http://localhost:9000/"
+	onMount(async () => {
+		await fetch(`${ADDRESS}articles/all`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+		})
+			.then((responseResult) => {
+				if (responseResult.status === 200) {
+					return responseResult.json()
+				} else {
+					throw new Error("Something went wrong")
+				}
+			})
+			.then((responseResultJSON) => {
+				console.log(responseResultJSON)
+				blogPostsArray = responseResultJSON.result
+			})
+			.catch((getArticlesError) => {
+				console.log(getArticlesError)
+			})
+	})
 
-	const posts = [
-		{
-			title: "Cyber-realists",
-			description:
-				"Soon after the invention of the wagon, someone was able to move logs around much more easily. And shortly after that, someone had a wagon run over their leg. Wagons were used to deliver food but they also were put to use hauling weapons around.",
-			imagePath: "./logo.png",
-			publishedDate: "23 Aug 2021",
-		},
-		{
-			title: "The nesting bowls",
-			description:
-				"Seven bowls might take up an entire cabinet. But if the designer slopes the sides of each bowl just so, they stack. The amount of space required to store them goes down by 80%. The hard part isn’t figuring out how to stack them. It’s realizing that stacking is an option.",
-			imagePath: "./logo.png",
-			publishedDate: "23 Aug 2021",
-		},
-		{
-			title: "The inevitable decline of fully open platforms",
-			description:
-				"The spammers have found Substack. There’s a long history of useful tools on the internet attracting selfish con men. Substack is a platform for bloggers who want paying subscribers. They’ve done the technical work and quiet lobbying to get past the promo folder and the spam filters, and as a result, a blog on Substack is going to reach more people and come with a veneer of respectability.",
-			imagePath: "./logo.png",
-			publishedDate: "23 Aug 2021",
-		},
-	]
+	function formatArticleDate(dateInput) {
+		const parsedDate = new Date(dateInput)
+		const intlOptions = { year: "numeric", month: "short", day: "numeric" }
+		return new Intl.DateTimeFormat("en-US", intlOptions).format(parsedDate)
+	}
 </script>
 
 <svelte:head>
-	<title>Blog</title>
+	<title>Index page</title>
 </svelte:head>
 
-<div class="blog-content">
-	{#each posts as post}
-		<Blogpost post={post} />
-	{/each}
+<!-- <div class="content">
+	<div class="articles-list">
+		{#if blogPostsArray != null}
+			{#each blogPostsArray as post}
+				<Blogpost post={post} />
+			{/each}
+		{:else}
+			<NewsSkeleton />
+		{/if}
+	</div>
+</div> -->
+
+<div class="content">
+	<div class="articles-list">
+		{#if blogPostsArray != null}
+			{#each blogPostsArray as blogPost}
+				<a rel="prefetch" class="article-link" href="blog/article/{blogPost.title.replace(/\s/g, '-')}-{blogPost._id}">
+					<div class="article">
+						<div class="article-description">
+							<h2 class="article-title">{@html blogPost.title}</h2>
+							<p class="article-short">{@html blogPost.subtitle}</p>
+							<span class="article-date">{formatArticleDate(blogPost.dateCreated)}</span>
+						</div>
+						<div class="article-preview">
+							{#if blogPost.previewSrc != ""}
+								<img
+									class="preview-image"
+									loading="lazy"
+									src={`${blogPost.previewSrc}`}
+									alt={blogPost.previewAlt}
+									on:error={() => {
+										blogPost.previewSrc = "/site/no-image.webp"
+									}}
+								/>
+							{:else}
+								<img class="preview-image" src="/site/no-image.webp" alt="No" />
+							{/if}
+						</div>
+					</div>
+				</a>
+			{/each}
+		{:else}
+			<NewsSkeleton />
+		{/if}
+	</div>
 </div>
+
+<style>
+	.content {
+		padding-bottom: 92px;
+	}
+	.articles-list {
+		padding-bottom: 96px;
+	}
+	.article {
+		display: grid;
+		grid-template: auto / 1fr 200px;
+		column-gap: 32px;
+		margin-top: 32px;
+	}
+	.article-title {
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		font-weight: 700;
+	}
+	.article-link {
+		text-decoration: none;
+	}
+	.article-short {
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		font-family: inherit;
+		color: var(--Gray75);
+	}
+	.article-date {
+		color: var(--Gray75);
+	}
+	.article-preview {
+		position: relative;
+		overflow: hidden;
+		width: 200px;
+		height: 132px;
+		/* background-color: var(--GrayCC); */
+	}
+	.preview-image {
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+	}
+</style>

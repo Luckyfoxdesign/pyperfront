@@ -1,23 +1,26 @@
 <script>
-	const ADDRESS = "https://bs.devcodebox.com/"
-	async function logut(params) {
-		await fetch(`${ADDRESS}go`).then((r) => console.log("logout: " + r))
-	}
-	async function register(params) {
-		await fetch(`${ADDRESS}rg`, {
-			credentials: "include",
-		}).then((r) => console.log("register: " + r))
-	}
+	import { goto } from "$app/navigation"
+	import { session } from "$app/stores"
+
+	// https://www.youtube.com/watch?v=bG7cxwBMVag
+
+	const ADDRESS = "http://localhost:9000/"
+
 	async function doreq(params) {
-		await fetch(`${ADDRESS}do`, {
+		// console.log(sid)
+		// console.log(data)
+		await fetch(`${ADDRESS}articles/all`, {
 			credentials: "include",
-		}).then((r) => console.log("do: " + r))
+		})
+			.then((re) => re.json())
+			.then((r) => {
+				console.log(r)
+				console.log($session.data)
+			})
 	}
 </script>
 
 <div>
 	<h1>Welcome to SvelteKit</h1>
-	<button on:click={logut}>logout</button>
-	<button on:click={register}>register</button>
 	<button on:click={doreq}>do</button>
 </div>

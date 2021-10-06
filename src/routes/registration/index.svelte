@@ -1,11 +1,23 @@
 <script context="module">
-	export function preload(page, { sid, data }) {
-		if (data != undefined) this.redirect(302, "/")
-		else return { sid, data }
+	export async function load({ fetch }) {
+		const fetchResult = await fetch("http://localhost:9000/api/auth/check-availability", {
+			method: "GET",
+			credentials: "include",
+		})
+		if (fetchResult.ok) {
+			return {
+				status: 302,
+				redirect: "/",
+			}
+		} else {
+			return {}
+		}
 	}
 </script>
 
 <script>
+	import { goto } from "$app/navigation"
+
 	// const ADDRESS = "https://bs.devcodebox.com/"
 	const ADDRESS = "http://localhost:9000/"
 	let password = "",
@@ -25,11 +37,11 @@
 				"Content-Type": "application/json",
 				Accept: "application/json",
 			},
+			credentials: "include",
 			body: JSON.stringify({ email, password }),
 		})
 		const responseJSON = await response.json()
-		$session.data = await responseJSON.data
-		console.log("registration" + responseJSON.data)
+		console.log(responseJSON)
 	}
 </script>
 
