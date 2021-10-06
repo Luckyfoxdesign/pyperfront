@@ -1,6 +1,7 @@
 <script context="module">
+	const address = "https://bs.devcodebox.com"
 	export async function load({ fetch }) {
-		const fetchResult = await fetch("http://localhost:9000/api/auth/check-availability", {
+		const fetchResult = await fetch(`${address}/api/auth/check-availability`, {
 			method: "GET",
 			credentials: "include",
 		})
@@ -18,8 +19,8 @@
 <script>
 	import { goto } from "$app/navigation"
 
-	// const ADDRESS = "https://bs.devcodebox.com/"
-	const ADDRESS = "http://localhost:9000/"
+	const ADDRESS = "https://bs.devcodebox.com"
+	// const ADDRESS = "http://localhost:9000/"
 	let password = "",
 		email = ""
 	export let sid, data
@@ -31,7 +32,7 @@
 	// !TODO Добавить валидацию полей
 
 	const register = async () => {
-		const response = await fetch(`${ADDRESS}api/auth/registration`, {
+		const response = await fetch(`${ADDRESS}/api/auth/registration`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

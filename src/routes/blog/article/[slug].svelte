@@ -27,7 +27,8 @@
 	onMount(async () => {
 		console.log(queryArticleTitle)
 		console.log(queryArticleId)
-		await fetch(encodeURI(`http://localhost:9000/article/${queryArticleTitle}-${queryArticleId}`), {
+		const address = "https://bs.devcodebox.com"
+		await fetch(encodeURI(`${address}/article/${queryArticleTitle}-${queryArticleId}`), {
 			method: "GET",
 			headers: {
 				"Content-Type": "text/plain;charset=utf-8",

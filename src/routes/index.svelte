@@ -4,7 +4,8 @@
 
 	// https://www.youtube.com/watch?v=bG7cxwBMVag
 
-	const ADDRESS = "http://localhost:9000/"
+	// const ADDRESS = "http://localhost:9000/"
+	const ADDRESS = "http://bs.devcodebox.com/"
 
 	async function doreq(params) {
 		// console.log(sid)

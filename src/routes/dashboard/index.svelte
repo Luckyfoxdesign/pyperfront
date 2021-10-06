@@ -26,7 +26,8 @@
 {/if} -->
 <script>
 	async function LogOut() {
-		const fetchResult = await fetch("http://localhost:9000/api/auth/logout", {
+		const address = "https://bs.devcodebox.com"
+		const fetchResult = await fetch(`${address}/api/auth/check-availability`, {
 			method: "GET",
 			credentials: "include",
 		})

@@ -1,6 +1,7 @@
 <script context="module">
+	const address = "https://bs.devcodebox.com"
 	export async function load({ fetch }) {
-		const fetchResult = await fetch("http://localhost:9000/api/auth/check-availability", {
+		const fetchResult = await fetch(`${address}/api/auth/check-availability`, {
 			method: "GET",
 			credentials: "include",
 		})

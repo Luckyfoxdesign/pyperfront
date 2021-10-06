@@ -4,9 +4,10 @@
 	import NewsSkeleton from "./_components/NewsSkeleton.svelte"
 
 	let blogPostsArray
-	const ADDRESS = "http://localhost:9000/"
+	const ADDRESS = "https://bs.devcodebox.com"
+	// const ADDRESS = "http://localhost:9000/"
 	onMount(async () => {
-		await fetch(`${ADDRESS}articles/all`, {
+		await fetch(`${ADDRESS}/articles/all`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
